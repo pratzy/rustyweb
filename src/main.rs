@@ -11,7 +11,7 @@ fn main() -> std::io::Result<()>{
     for stream in listener.incoming() {
         match stream {
             Ok(stream) => {
-                pool.execute(|| handle_connection(stream));
+                pool.execute(move || handle_connection(stream));
             }
             Err(e) => {
                 panic!("Error in receiving connection {:?}", e)
